@@ -5,13 +5,14 @@ import { useStateValue } from "../StateProvider";
 const BasketItem = ({ id, image, title, price, rating }) => {
   const [{ basket }, dispatch] = useStateValue();
 
-  const removeFromBasket = (basket) => {
+  const removeFromBasket = () => {
     // dispatch the item into the data layer
     dispatch({
       type: "REMOVE_FROM_BASKET",
       id: id,
     });
   };
+
   return (
     <div className="basketItem">
       <img className="basketItem__image" src={image} alt="" />
@@ -28,7 +29,7 @@ const BasketItem = ({ id, image, title, price, rating }) => {
               <p>⭐</p>
             ))}
         </div>
-        <button onClick={removeFromBasket(basket)}>Remove from Basket</button>
+        <button onClick={removeFromBasket}>Remove from Basket</button>
       </div>
     </div>
   );

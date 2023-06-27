@@ -17,10 +17,22 @@ const reducer = (state, action) => {
         ...state,
         basket: [...state.basket, action.item],
       };
+
     case "REMOVE_FROM_BASKET":
+      const index = state.basket.findIndex(
+        (basketItem) => basketItem.id === action.id
+      );
+      let newBasket = [...state.basket]; // copy of the basket
+      if (index >= 0) {
+        newBasket.splice(index, 1); // remove the item from the basket
+      } else {
+        console.warn(
+          `Can't remove product (id: ${action.id}) as it's not in the basket`
+        );
+      }
       return {
         ...state,
-        basket: state.basket.filter((item) => item.id !== action.id),
+        basket: newBasket,
       };
 
     default:
