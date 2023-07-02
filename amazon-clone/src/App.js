@@ -8,6 +8,14 @@ import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import Payment from "./components/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+// import Orders from "./components/Orders";
+
+// If you want to use cloud function without blaze plan then Use  'firebase serve --only functions' instead of 'firebase emulators:start' command
+const promise = loadStripe(
+  "pk_test_51NPCktAuPZYdbXedtjKolFncu0s6m8NlrPGEx4yuqz36qY82SlGwdZeZFgfvW7Blg48ucOWTzRo7Y3DbflsbeKrC009Wps7I5S"
+);
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -44,7 +52,15 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route
+          path="/payment"
+          element={
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
+          }
+        />
+        {/* <Route path="/orders" element="Orders" /> */}
       </Routes>
     </div>
   );
