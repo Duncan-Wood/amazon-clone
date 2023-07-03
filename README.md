@@ -4,7 +4,7 @@
 
 ## Take a Look
 
-![Deployed Site](https://clone-153b6.web.app/)
+[Deployed Site](https://clone-153b6.web.app/)
 
 # Amazon Clone App
 
